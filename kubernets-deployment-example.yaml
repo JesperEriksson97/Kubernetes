@@ -5,18 +5,35 @@ kind: Deployment # Every kind has a different apiVersion (see line 2 and 15)
 metadata:
   name: example-deployment
   labels:
+    app: nginx # 1
 # Specifications
 spec:
-  replicas: # Amount of containers you want
-  selector:
+  replicas: 2 # Amount of containers you want
+  selector:    
+    matchLabels:  # Pods get the label through the template blueprint
+      app: nginx # matches the labels
   template:
+    metadata:
+      labels:
+        app: nginx # 2
+    # The specification inside of a template applies to a pod
+    # The "spec" is also referred to as a blueprint for a pod
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:latest
+        ports:
+        - containerPort: 8080
 
 # Metadata for a Service
 apiVersion: v1
 kind: Service
 metadata:
   name: exampel-service
-  labels:
 spec:
   selector:
-  port:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80 # The port to the example-deployment Service
+      targetPort: 8080 # The port to the Pod inside the service defined as "containerPort" in the deployment
