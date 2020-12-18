@@ -1,0 +1,12 @@
+# Metadata for a Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: exampel-service
+spec:
+  selector:
+    app: nginx
+  ports:
+    - protocol: TCP
+      port: 80 # The port to the example-deployment Service
+      targetPort: 8080 # The port to the Pod inside the service defined as "containerPort" in the deployment
