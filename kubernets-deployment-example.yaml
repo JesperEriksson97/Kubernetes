@@ -1,0 +1,22 @@
+# Deployment
+apiVersion: apps/v1
+kind: Deployment # Every kind has a different apiVersion (see line 2 and 15)
+# Metadata
+metadata:
+  name: example-deployment
+  labels:
+# Specifications
+spec:
+  replicas: # Amount of containers you want
+  selector:
+  template:
+
+# Metadata for a Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: exampel-service
+  labels:
+spec:
+  selector:
+  port:
